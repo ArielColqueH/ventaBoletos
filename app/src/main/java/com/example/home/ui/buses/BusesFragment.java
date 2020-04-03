@@ -2,6 +2,7 @@ package com.example.home.ui.buses;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.home.R;
 import com.example.home.ui.socios.AdminDataBase;
+import com.example.home.ui.socios.ModeloSocio;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,8 +32,10 @@ import java.util.List;
 public class BusesFragment extends Fragment {
 
     private BusesViewModel slideshowViewModel;
-    List <String> lista;
+    List <ModeloSocio> listaBase;
+    List <String> listaSpinner= new ArrayList<>();
     AdminDataBase adb;
+    ModeloSocio aux;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -81,10 +85,18 @@ public class BusesFragment extends Fragment {
         });
         //segundo spinner
         adb = new AdminDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
-        lista = adb.getListaSocios();
-        lista.add(0,"Nombre de Socios");
+        listaBase = adb.getListaSocios();
+        for(int i=0;i<listaBase.size();i++){
+            aux=listaBase.get(i);
+            String spnNombre = aux.getNomSoc();
+            String spnApel = aux.getApeSoc();
+            String nombreCompleto = spnNombre+" "+spnApel;
+            //Log.d("spinner","y :"+nombreCompleto );
+            listaSpinner.add(nombreCompleto);
+        }
+        listaSpinner.add(0,"Nombre de Socio");
         final Spinner spinnerSocios = view.findViewById(R.id.spinnerSocios);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, lista);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, listaSpinner);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerSocios.setAdapter(adapter2);
         spinnerSocios.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

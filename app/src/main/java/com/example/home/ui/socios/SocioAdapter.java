@@ -127,6 +127,7 @@ public class SocioAdapter extends RecyclerView.Adapter<SocioAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 int poss = posi;
+
                 c=lista.get(poss);
                 setId(c.getIdSoc());
                 AlertDialog.Builder del = new AlertDialog.Builder(context);
@@ -135,9 +136,10 @@ public class SocioAdapter extends RecyclerView.Adapter<SocioAdapter.MyViewHolder
                 del.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Log.d("mytag","x :"+getId() ); int estado=1;
                         Log.d("mytag","x :"+getId() );
                         adb = new AdminDataBase(context,"empresaDeTransporte.db",null, 1);
-                        adb.eliminar(getId());
+                        adb.eliminar(new ModeloSocio(getId(),estado));
                         lista= (ArrayList<ModeloSocio>)adb.listaSocios();
                         notifyDataSetChanged();
 

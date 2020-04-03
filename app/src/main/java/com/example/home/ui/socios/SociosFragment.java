@@ -44,8 +44,6 @@ public class SociosFragment extends Fragment {
         mAdapter = new SocioAdapter(getActivity(),(ArrayList<ModeloSocio>)adb.listaSocios());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
         FloatingActionButton fab = root.findViewById(R.id.fabhome);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,11 +86,12 @@ public class SociosFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String id,nom, ape;
+                int estado=0;
 //                id = etid.getText().toString().trim();
                 nom = nomb.getText().toString().trim();
                 ape = apel.getText().toString().trim();
                 if(nom.length() > 0 && ape.length()>0) {
-                    adb.altaSocio(new ModeloSocio(nom,ape));
+                    adb.altaSocio(new ModeloSocio(nom,ape,estado));
                     Toast.makeText(getActivity(), "El registro se grabo con exito", Toast.LENGTH_SHORT).show();
                     listafdb = adb.listaSocios();
                     mAdapter = new SocioAdapter(getActivity(),(ArrayList<ModeloSocio>)listafdb);

@@ -4,15 +4,34 @@ public class ModeloSocio {
     private int idSoc;
     private String nomSoc;
     private String apeSoc;
+    private int estSoc;
 
+    public ModeloSocio(int idSoc, String nomSoc, String apeSoc,int estSoc) {
+        this.idSoc = idSoc;
+        this.nomSoc = nomSoc;
+        this.apeSoc = apeSoc;
+        this.estSoc = estSoc;
+    }
+    public ModeloSocio(int idSoc,int estSoc) {
+        this.idSoc = idSoc;
+        this.estSoc = estSoc;
+    }
     public ModeloSocio(int idSoc, String nomSoc, String apeSoc) {
         this.idSoc = idSoc;
         this.nomSoc = nomSoc;
         this.apeSoc = apeSoc;
     }
-    public ModeloSocio(String nomSoc, String apeSoc) {
+    public ModeloSocio(String nomSoc, String apeSoc,int estSoc) {
         this.nomSoc = nomSoc;
         this.apeSoc = apeSoc;
+        this.estSoc=estSoc;
+    }
+    public int getEstSoc() {
+        return estSoc;
+    }
+
+    public void setEstSoc(int estSoc) {
+        this.estSoc = estSoc;
     }
 
     public int getIdSoc() {
