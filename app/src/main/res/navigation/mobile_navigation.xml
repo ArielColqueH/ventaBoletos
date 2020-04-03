@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.home.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_boletos"
+        android:name="com.example.home.ui.boleto.BoletoFragment"
+        android:label="@string/menu_boletos"
+        tools:layout="@layout/fragment_boletos" />
+
+    <fragment
+        android:id="@+id/nav_liquidacion"
+        android:name="com.example.home.ui.liquidacion.LiquidacionFragment"
+        android:label="@string/menu_liquidacion"
+        tools:layout="@layout/fragment_liquidacion" />
+
+    <fragment
+        android:id="@+id/nav_buses"
+        android:name="com.example.home.ui.buses.BusesFragment"
+        android:label="@string/menu_buses"
+        tools:layout="@layout/fragment_buses" />
+
+    <fragment
+        android:id="@+id/nav_socios"
+        android:name="com.example.home.ui.socios.SociosFragment"
+        android:label="@string/menu_socios"
+        tools:layout="@layout/fragment_socios" />
+
+</navigation>

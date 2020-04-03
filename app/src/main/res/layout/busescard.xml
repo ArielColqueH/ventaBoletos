@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_socios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        card_view:cardCornerRadius="15dp"
+        card_view:cardMaxElevation="10dp"
+        >
+        <LinearLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:layout_weight="0.75"
+            android:layout_gravity="center_vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Codigo : "
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+                <TextView
+                    android:id="@+id/codigoBus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Codigo Bus"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Placa :"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+                <TextView
+                    android:id="@+id/numeroPlaca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Numero de Placa"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Capacidad :"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+                <TextView
+                    android:id="@+id/numeroAsientos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Numero de Asientos"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de Bus :"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+                <TextView
+                    android:id="@+id/tipoBus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de Bus"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Socio :"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+                <TextView
+                    android:id="@+id/socioBus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="nombre Socio"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

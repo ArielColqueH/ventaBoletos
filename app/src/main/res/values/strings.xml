@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Administrador</string>
+    <string name="nav_header_subtitle">Ariel Colque Herrera</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Salidas</string>
+    <string name="menu_boletos">Boletos</string>
+    <string name="menu_liquidacion">Liquidacion</string>
+    <string name="menu_buses">Buses</string>
+    <string name="menu_socios">Socios</string>
+    <!--pasajero Salida-->
+    <string name="ingrese_salida">Ingrese salida</string>
+    <string name="ingrese_fecha">Ingrese fecha</string>
+    <!--pasajero String-->
+    <string name="nombre_pasajero">Ingrese el nombre del pasajero</string>
+    <string name="nit_pasajero">Ingrese el nit del pasajero</string>
+    <string name="asiento_pasajero">Ingrese el asiento del pasajero</string>
+    <!--socio String-->
+    <string name="nombre_socio">Ingrese el nombre del socio</string>
+    <string name="apellido_socio">Ingrese el apellido del socio</string>
+    <!--bus String-->
+    <string name="placa_bus">Placa</string>
+    <string name="asientos_bus">Asientos</string>
+
+    <string-array name="codigo">
+        <item>1</item>
+        <item>2</item>
+        <item>1</item>
+        <item>2</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="destinos">
+        <item>Uyuni</item>
+        <item>Tupiza</item>
+        <item>Tupiza</item>
+        <item>Tupiza</item>
+        <item>Tupiza</item>
+        <item>Tupiza</item>
+    </string-array>
+    <string-array name="fecha">
+        <item>1/1/2001</item>
+        <item>2/2/2002</item>
+        <item>1/1/2001</item>
+        <item>2/2/2002</item>
+        <item>2/2/2002</item>
+        <item>2/2/2002</item>
+    </string-array>
+
+    <string-array name="numbers">
+        <item>Elija un Destino</item>
+        <item>One</item>
+        <item>Two</item>
+    </string-array>
+    <string-array name="tipoBus">
+        <item>Elija un tipo de Bus</item>
+        <item>Cama</item>
+        <item>Semi Cama</item>
+    </string-array>
+</resources>
