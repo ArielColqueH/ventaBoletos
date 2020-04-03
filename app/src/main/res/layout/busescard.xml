@@ -14,6 +14,7 @@
         card_view:cardCornerRadius="15dp"
         card_view:cardMaxElevation="10dp"
         >
+
         <LinearLayout
             android:padding="15dp"
             android:layout_width="match_parent"
@@ -28,12 +29,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
+                <ImageView
+                    android:id="@+id/row_wallet_redeem_img"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_bus_3"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Codigo : "
                     android:textSize="16dp"
                     android:layout_weight="1.5"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/codigoBus"
@@ -42,6 +59,7 @@
                     android:text="Codigo Bus"
                     android:textSize="16dp"
                     android:layout_weight="1.5"
+
                     />
             </LinearLayout>
             <LinearLayout
@@ -55,6 +73,7 @@
                     android:text="Placa :"
                     android:textSize="16dp"
                     android:layout_weight="1.5"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/numeroPlaca"
@@ -76,6 +95,7 @@
                     android:text="Capacidad :"
                     android:textSize="16dp"
                     android:layout_weight="1.5"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/numeroAsientos"
@@ -97,6 +117,7 @@
                     android:text="Tipo de Bus :"
                     android:textSize="16dp"
                     android:layout_weight="1.5"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/tipoBus"
@@ -118,6 +139,7 @@
                     android:text="Socio :"
                     android:textSize="16dp"
                     android:layout_weight="1.5"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/socioBus"
