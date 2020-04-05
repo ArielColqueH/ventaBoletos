@@ -19,10 +19,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
 import com.example.home.ui.socios.AdminDataBase;
 import com.example.home.ui.socios.ModeloSocio;
+import com.example.home.ui.socios.SocioAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,20 +38,36 @@ public class BusesFragment extends Fragment {
     List <ModeloSocio> listaBase;
     List <String> listaSpinner= new ArrayList<>();
     AdminDataBase adb;
+    busesDataBase busdb;
     ModeloSocio aux;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    List <ModeloBus> listafdb = new ArrayList<ModeloBus>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         slideshowViewModel =
                 ViewModelProviders.of(this).get(BusesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_buses, container, false);
+        //busdb = new busesDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
+        adb = new AdminDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
+        recyclerView = (RecyclerView)  root.findViewById(R.id.my_recycler_buses);
+        mAdapter = new BusAdapter(getActivity(),(ArrayList<ModeloBus>)adb.listaBuses());
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FloatingActionButton fab = root.findViewById(R.id.fabhome);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(getActivity(),
 //                        "Home", Toast.LENGTH_SHORT).show();
-                agregarBus();
+                try{
+                    agregarBus();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity(),
+                            "Error", Toast.LENGTH_SHORT).show();
+                };
             }
         });
         return root;
@@ -58,10 +77,13 @@ public class BusesFragment extends Fragment {
         LayoutInflater inflador = LayoutInflater.from(getActivity());
         final View view = inflador.inflate(R.layout.dialog_buses ,null, false);
 
-        final EditText etid, etnom,etst;
-//        etid = (EditText)view.findViewById(R.id.etIdProd);
-//        etnom = (EditText)view.findViewById(R.id.etNomProd);
-//        etst = (EditText)view.findViewById(R.id.etStock);
+        final EditText placaBus, capacidadBus;
+        final Spinner tipoBus,nombreDuenoBus;
+        placaBus = (EditText)view.findViewById(R.id.placaBus);
+        capacidadBus = (EditText)view.findViewById(R.id.capacidadBus);
+        tipoBus = (Spinner) view.findViewById(R.id.spinnerTipoBus);
+        nombreDuenoBus = (Spinner) view.findViewById(R.id.spinnerSocios);
+
 
         androidx.appcompat.app.AlertDialog.Builder alertAlta = new AlertDialog.Builder(getActivity());
         alertAlta.setTitle("Agregar Bus");
@@ -84,7 +106,7 @@ public class BusesFragment extends Fragment {
             }
         });
         //segundo spinner
-        adb = new AdminDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
+
         listaBase = adb.getListaSocios();
         for(int i=0;i<listaBase.size();i++){
             aux=listaBase.get(i);
@@ -120,6 +142,24 @@ public class BusesFragment extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(!spinnerTipoBus.getSelectedItem().toString().equalsIgnoreCase("Elija un tipo de Bus")){
                     Toast.makeText(getActivity(),spinnerTipoBus.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                    String placa;
+                    int capacidad;
+                    int estado=0;
+                    String tipoB = tipoBus.getSelectedItem().toString();
+                    int duenioId = nombreDuenoBus.getSelectedItemPosition();
+                    placa = placaBus.getText().toString().trim();
+                    Log.d("ID SOCIO","VALOR :"+duenioId);
+                    capacidad = Integer.parseInt(capacidadBus.getText().toString());
+                    if(placa.length() > 0 ) {
+                        adb.altaBus(new ModeloBus(placa,capacidad,tipoB,estado,duenioId));
+                        Toast.makeText(getActivity(), "El registro se grabo con exito", Toast.LENGTH_SHORT).show();
+                        listafdb = adb.listaBuses();
+                        mAdapter = new BusAdapter(getActivity(),(ArrayList<ModeloBus>)listafdb);
+                        recyclerView.setAdapter(mAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    }else{
+                        Toast.makeText(getActivity(), "Error, campos vacios", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }

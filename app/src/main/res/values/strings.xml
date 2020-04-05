@@ -23,7 +23,7 @@
     <string name="apellido_socio">Ingrese el apellido del socio</string>
     <!--bus String-->
     <string name="placa_bus">Placa</string>
-    <string name="asientos_bus">Asientos</string>
+    <string name="capacidad_bus">Capacidad</string>
 
     <string-array name="codigo">
         <item>1</item>
