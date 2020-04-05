@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
+import com.example.home.ui.AdminDataBase;
 import com.example.home.ui.buses.busesDataBase;
 import com.example.home.ui.socios.ModeloSocio;
 
@@ -26,7 +27,8 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
     ArrayList<ModeloBus> lista;
     Context context;
     ModeloBus b ;
-    busesDataBase adb;
+    AdminDataBase adb;
+
     int id=0;
 
     public int getId() {
@@ -42,6 +44,7 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView codigoBus,capacidadBus,placaBus, nombreSocio,tipoBus;
+
         // each data item is just a string in this case
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +60,7 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
     public BusAdapter(Context ct, ArrayList<ModeloBus> lista) {
             context=ct;
             this.lista=lista;
+             adb = new AdminDataBase(ct,"empresaDeTransporte.db",null, 1);
     }
 
     // Create new views (invoked by the layout manager)
@@ -73,11 +77,14 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final int posi = position;
+        String nombreSocio="prueba";
         final ModeloBus item = lista.get(position);
         holder.codigoBus.setText(String.valueOf(item.getIdBus()));
         holder.placaBus.setText(item.getPlaca());
         holder.capacidadBus.setText(String.valueOf(item.getCapacidad()));
-        holder.nombreSocio.setText(String.valueOf(item.getDuenio()));
+        Log.d("id duenio",":"+item.getDuenio());
+        nombreSocio=adb.getNombreSocio(String.valueOf(item.getDuenio()));
+        holder.nombreSocio.setText(nombreSocio);
         holder.tipoBus.setText(item.getTipoBus());
     }
     // Return the size of your dataset (invoked by the layout manager)

@@ -10,26 +10,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
-import com.example.home.ui.socios.AdminDataBase;
+import com.example.home.ui.AdminDataBase;
 import com.example.home.ui.socios.ModeloSocio;
-import com.example.home.ui.socios.SocioAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BusesFragment extends Fragment {
@@ -43,6 +39,7 @@ public class BusesFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     List <ModeloBus> listafdb = new ArrayList<ModeloBus>();
+    HashMap<Integer,Integer> spinnerMap = new HashMap<Integer, Integer>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -108,8 +105,11 @@ public class BusesFragment extends Fragment {
         //segundo spinner
 
         listaBase = adb.getListaSocios();
+
         for(int i=0;i<listaBase.size();i++){
             aux=listaBase.get(i);
+            Log.d("idSocio",":"+aux.getIdSoc());
+            spinnerMap.put(i+1,aux.getIdSoc());
             String spnNombre = aux.getNomSoc();
             String spnApel = aux.getApeSoc();
             String nombreCompleto = spnNombre+" "+spnApel;
@@ -146,9 +146,12 @@ public class BusesFragment extends Fragment {
                     int capacidad;
                     int estado=0;
                     String tipoB = tipoBus.getSelectedItem().toString();
-                    int duenioId = nombreDuenoBus.getSelectedItemPosition();
+                    int duenioPosition = nombreDuenoBus.getSelectedItemPosition();
+                    Log.d("duenio POSITION",":"+duenioPosition);
+                    Log.d("duenio key",":"+spinnerMap.get(nombreDuenoBus.getSelectedItemPosition()));
+                    int duenioId = spinnerMap.get(nombreDuenoBus.getSelectedItemPosition());
                     placa = placaBus.getText().toString().trim();
-                    Log.d("ID SOCIO","VALOR :"+duenioId);
+                    //Log.d("ID SOCIO","VALOR :"+duenioId);
                     capacidad = Integer.parseInt(capacidadBus.getText().toString());
                     if(placa.length() > 0 ) {
                         adb.altaBus(new ModeloBus(placa,capacidad,tipoB,estado,duenioId));

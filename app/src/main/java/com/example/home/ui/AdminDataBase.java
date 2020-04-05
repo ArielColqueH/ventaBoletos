@@ -1,4 +1,4 @@
-package com.example.home.ui.socios;
+package com.example.home.ui;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.home.ui.buses.ModeloBus;
+import com.example.home.ui.socios.ModeloSocio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +20,20 @@ public class AdminDataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table socios(idSocio INTEGER PRIMARY KEY AUTOINCREMENT, nomSoc TEXT, apeSoc TEXT ,estSoc INTEGER)";
-        String sql2 = "create table buses2(idBus INTEGER PRIMARY KEY AUTOINCREMENT, placa TEXT, capacidad INTEGER ,tipobus TEXT ,estado INTEGER,idSocio INTEGER)";
-        db.execSQL(sql);
-        db.execSQL(sql2);
+        String sqlSocios = "create table socios(idSocio INTEGER PRIMARY KEY AUTOINCREMENT, nomSoc TEXT, apeSoc TEXT ,estSoc INTEGER)";
+        String sqlBuses = "create table buses(idBus INTEGER PRIMARY KEY AUTOINCREMENT, placa TEXT, capacidad INTEGER ,tipobus TEXT ,estado INTEGER,idSocio INTEGER)";
+        db.execSQL(sqlSocios);
+        db.execSQL(sqlBuses);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS socios");
-        db.execSQL("DROP TABLE IF EXISTS buses2");
+        db.execSQL("DROP TABLE IF EXISTS buses");
         onCreate(db);
     }
-
-    void altaSocio(ModeloSocio op){
+    //------------------------------SOCIOS------------------------------
+    public void altaSocio(ModeloSocio op){
         try {
             ContentValues cv = new ContentValues();
             cv.put("nomSoc", op.getNomSoc());
@@ -45,22 +45,6 @@ public class AdminDataBase extends SQLiteOpenHelper {
         }catch (Exception e){
 //            Toast.makeText(context,
 //                    "Error al aniadir", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void altaBus(ModeloBus op){
-        try {
-            ContentValues cv = new ContentValues();
-            cv.put("placa", op.getPlaca());
-            cv.put("capacidad",op.getCapacidad());
-            cv.put("tipobus",op.getTipoBus());
-            cv.put("estado",op.getEstado());
-            cv.put("idSocio",op.getDuenio());
-            SQLiteDatabase sdb = this.getWritableDatabase();
-            sdb.insert("buses2",null,cv);
-            Log.d("db","ALTA");
-        }catch (Exception e){
-            Log.d("db","ERROR ALTA");
         }
     }
 
@@ -85,7 +69,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
         return lista;
     }
 
-    void editar(ModeloSocio op){
+    public void editar(ModeloSocio op){
         try {
             ContentValues cv = new ContentValues();
             cv.put("nomSoc", op.getNomSoc());
@@ -99,7 +83,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
         }
     }
 
-    void eliminar(ModeloSocio op){
+    public void eliminar(ModeloSocio op){
         try {
             ContentValues cv = new ContentValues();
             cv.put("estSoc", op.getEstSoc());
@@ -108,7 +92,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
         }catch (Exception e){
         }
     }
-//------------------------------externo------------------------------
+
     public List<ModeloSocio> getListaSocios(){
         String sql = "SELECT idSocio,nomSoc,apeSoc FROM socios where estSoc==0";
         SQLiteDatabase sdb = this.getReadableDatabase();
@@ -127,15 +111,26 @@ public class AdminDataBase extends SQLiteOpenHelper {
         registros.close();
         return lista;
 }
+//------------------------------//SOCIOS------------------------------
+    //-----------BUSES---------------------
 
-
-
-
-
-
-    // listado de una tabla
+    public void altaBus(ModeloBus op){
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("placa", op.getPlaca());
+            cv.put("capacidad",op.getCapacidad());
+            cv.put("tipobus",op.getTipoBus());
+            cv.put("estado",op.getEstado());
+            cv.put("idSocio",op.getDuenio());
+            SQLiteDatabase sdb = this.getWritableDatabase();
+            sdb.insert("buses",null,cv);
+            Log.d("db","ALTA");
+        }catch (Exception e){
+            Log.d("db","ERROR ALTA");
+        }
+    }
     public List<ModeloBus> listaBuses(){
-        String sql = "SELECT * FROM buses2";
+        String sql = "SELECT a.idBus,a.placa,a.capacidad,a.tipobus,a.idSocio FROM buses a";
         SQLiteDatabase sdb = this.getReadableDatabase();
         List<ModeloBus> lista = new ArrayList<>();
         Cursor registros = sdb.rawQuery(sql,null);
@@ -161,7 +156,26 @@ public class AdminDataBase extends SQLiteOpenHelper {
         registros.close();
         return lista;
     }
-
+    public String getNombreSocio(String idSoc) {
+        String sql = "SELECT nomSoc,apeSoc FROM socios where idSocio="+idSoc;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String noSocio = "";
+        String apSocio = "";
+        String nc = "prueba";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    noSocio = registros.getString(0);
+                    apSocio = registros.getString(1);
+                    nc=noSocio+" "+apSocio;
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return nc;
+    }
+    //-----------//BUSES ---------------------
 
 
 }
