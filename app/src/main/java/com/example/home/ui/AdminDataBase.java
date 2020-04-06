@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.home.ui.buses.ModeloBus;
+import com.example.home.ui.home.ModeloSalida;
 import com.example.home.ui.socios.ModeloSocio;
 
 import java.util.ArrayList;
@@ -22,14 +23,17 @@ public class AdminDataBase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sqlSocios = "create table socios(idSocio INTEGER PRIMARY KEY AUTOINCREMENT, nomSoc TEXT, apeSoc TEXT ,estSoc INTEGER)";
         String sqlBuses = "create table buses(idBus INTEGER PRIMARY KEY AUTOINCREMENT, placa TEXT, capacidad INTEGER ,tipobus TEXT ,estado INTEGER,idSocio INTEGER)";
+        String sqlSalidas = "create table salidas(idSalida INTEGER PRIMARY KEY AUTOINCREMENT, fecha TEXT, hora TEXT ,destino TEXT ,estado INTEGER,idBus INTEGER)";
         db.execSQL(sqlSocios);
         db.execSQL(sqlBuses);
+        db.execSQL(sqlSalidas);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS socios");
         db.execSQL("DROP TABLE IF EXISTS buses");
+        db.execSQL("DROP TABLE IF EXISTS salidas");
         onCreate(db);
     }
     //------------------------------SOCIOS------------------------------
@@ -177,6 +181,49 @@ public class AdminDataBase extends SQLiteOpenHelper {
     }
     //-----------//BUSES ---------------------
     //-----------SALIDAS ---------------------
+
+    public void altaSalida(ModeloSalida op){
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("fecha", op.getFechaSalida());
+            cv.put("hora",op.getHoraSalida());
+            cv.put("destino",op.getDestino());
+            cv.put("estado",op.getEstado());
+            cv.put("idBus",op.getIdBus());
+            SQLiteDatabase sdb = this.getWritableDatabase();
+            sdb.insert("salidas",null,cv);
+            Log.d("db","ALTA");
+        }catch (Exception e){
+            Log.d("db","ERROR ALTA");
+        }
+    }
+    public List<ModeloSalida> listaSalidas(){
+        String sql = "SELECT a.idSalida,a.destino,a.fecha,a.hora,a.idBus FROM salidas a";
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        List<ModeloSalida> lista = new ArrayList<>();
+        Cursor registros = sdb.rawQuery(sql,null);
+        if(registros!=null && registros.getCount()>0){
+            if(registros.moveToFirst()){
+                do{
+                    int idSalida = registros.getInt(0);
+                    String destino = registros.getString(1);
+                    String fecha = registros.getString(2);
+                    String hora = registros.getString(3);
+                    int idBus = registros.getInt(4);
+                    lista.add(new ModeloSalida(idSalida,destino,fecha,hora,idBus));
+                }while(registros.moveToNext());
+            }
+        }else{
+            if(registros.getCount()==0){
+                Log.d("error db","registros=0");
+            }else{
+                Log.d("error db","error al ingresar a db");
+            }
+
+        }
+        registros.close();
+        return lista;
+    }
     public String getNombreSocioFromBus(String idBus) {
         String sql = "SELECT s.nomSoc FROM socios s,bus b where s.idSocio=b.idSocio and b.idBus="+idBus;
         SQLiteDatabase sdb = this.getReadableDatabase();
