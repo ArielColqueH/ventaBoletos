@@ -30,6 +30,7 @@ public class SociosFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     List <ModeloSocio> listafdb = new ArrayList<ModeloSocio>();
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         toolsViewModel =

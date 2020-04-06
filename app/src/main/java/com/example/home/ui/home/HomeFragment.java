@@ -5,12 +5,16 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -28,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.home.R;
 import com.example.home.ui.AdminDataBase;
 import com.example.home.ui.buses.BusAdapter;
+import com.example.home.ui.buses.ModeloBus;
 import com.example.home.ui.socios.ModeloSocio;
 import com.example.home.ui.socios.SocioAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,6 +40,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -44,7 +50,11 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     AdminDataBase adb;
+    ModeloBus aux;
     List<ModeloSalida> listafdb = new ArrayList<ModeloSalida>();
+    List <ModeloBus> listaBase;
+    List <String> listaSpinner= new ArrayList<>();
+    HashMap<Integer,Integer> spinnerMap = new HashMap<Integer, Integer>();
 
 
 
@@ -167,10 +177,56 @@ public class HomeFragment extends Fragment {
         //-----------------------------------------------
 
 
-        final EditText etid, etnom,etst;
-//        etid = (EditText)view.findViewById(R.id.etIdProd);
-//        etnom = (EditText)view.findViewById(R.id.etNomProd);
-//        etst = (EditText)view.findViewById(R.id.etStock);
+        final EditText fecha, hora;
+        final Spinner destino,placa;
+        fecha = (EditText)view.findViewById(R.id.et_mostrar_fecha_picker);
+        hora = (EditText)view.findViewById(R.id.et_mostrar_hora_picker);
+        destino = (Spinner) view.findViewById(R.id.spinnerSalidas);
+        placa = (Spinner) view.findViewById(R.id.spinnerPlacas);
+
+
+        final Spinner spinnerDestinos = view.findViewById(R.id.spinnerSalidas);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.salidas,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerDestinos.setAdapter(adapter);
+        spinnerDestinos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+//                String text = adapterView.getItemAtPosition(position).toString();
+//                Toast.makeText(adapterView.getContext(),text,Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        //segundo spinner
+
+        listaBase = adb.getListaPlacas();
+
+        for(int i=0;i<listaBase.size();i++){
+            aux=listaBase.get(i);
+            Log.d("idSocio",":"+aux.getIdBus());
+            spinnerMap.put(i+1,aux.getIdBus());
+            String spnPlaca = aux.getPlaca();
+            listaSpinner.add(spnPlaca);
+        }
+        listaSpinner.add(0,"Placas");
+        final Spinner spinnerPlacas = view.findViewById(R.id.spinnerPlacas);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, listaSpinner);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerPlacas.setAdapter(adapter2);
+        spinnerPlacas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+//                String text = adapterView.getItemAtPosition(position).toString();
+//                Toast.makeText(adapterView.getContext(),text,Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         androidx.appcompat.app.AlertDialog.Builder alertAlta = new AlertDialog.Builder(getActivity());
         alertAlta.setTitle("Agregar nueva Salida de Bus");
@@ -185,14 +241,35 @@ public class HomeFragment extends Fragment {
         alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                if(!spinnerDestinos.getSelectedItem().toString().equalsIgnoreCase("Elija un Destino")
+                && !spinnerPlacas.getSelectedItem().toString().equalsIgnoreCase("Placas"
+                )){
+                    Toast.makeText(getActivity(),spinnerDestinos.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                    String h,f;
+                    int duenioPosition = placa.getSelectedItemPosition();
+                    Log.d("placa POSITION",":"+duenioPosition);
+                    Log.d("placa key",":"+spinnerMap.get(placa.getSelectedItemPosition()));
+                    int duenioPlaca = spinnerMap.get(placa.getSelectedItemPosition());
+                    int estado=0;
+                    String dest = destino.getSelectedItem().toString();
+                    h = hora.getText().toString().trim();
+                    f = fecha.getText().toString().trim();
+                    if(h.length() > 0 && f.length()>0) {
+                        adb.altaSalida(new ModeloSalida(dest,f,h,estado,duenioPlaca));
+                        Toast.makeText(getActivity(), "El registro se grabo con exito", Toast.LENGTH_SHORT).show();
+                        listafdb = adb.listaSalidas();
+                        mAdapter = new SalidaAdapter(getActivity(),(ArrayList<ModeloSalida>)listafdb);
+                        recyclerView.setAdapter(mAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    }else{
+                        Toast.makeText(getActivity(), "Error, campos vacios", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
             }
         });
         alertAlta.show();
 
     }
-    private void obtenerFecha(){
 
-
-    }
 }

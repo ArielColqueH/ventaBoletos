@@ -179,6 +179,24 @@ public class AdminDataBase extends SQLiteOpenHelper {
         registros.close();
         return nc;
     }
+
+    public List<ModeloBus> getListaPlacas(){
+        String sql = "SELECT idBus,placa FROM buses where estado==0";
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        List<ModeloBus> lista = new ArrayList<>();
+        Cursor registros = sdb.rawQuery(sql,null);
+        if(registros!=null && registros.getCount()>0){
+            if(registros.moveToFirst()){
+                do{
+                    int idBus = registros.getInt(0);
+                    String placa = registros.getString(1);
+                    lista.add(new ModeloBus(idBus,placa));
+                }while(registros.moveToNext());
+            }
+        }
+        registros.close();
+        return lista;
+    }
     //-----------//BUSES ---------------------
     //-----------SALIDAS ---------------------
 
@@ -225,7 +243,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
         return lista;
     }
     public String getNombreSocioFromBus(String idBus) {
-        String sql = "SELECT s.nomSoc FROM socios s,bus b where s.idSocio=b.idSocio and b.idBus="+idBus;
+        String sql = "SELECT s.nomSoc FROM socios s,buses b where s.idSocio=b.idSocio and b.idBus="+idBus;
         SQLiteDatabase sdb = this.getReadableDatabase();
         Cursor registros = sdb.rawQuery(sql, null);
         String noSocio = "";
@@ -240,7 +258,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
         return noSocio;
     }
     public String getPlacaBus(String idBus) {
-        String sql = "SELECT placa FROM bus  where idBus="+idBus;
+        String sql = "SELECT placa FROM buses where idBus="+idBus;
         SQLiteDatabase sdb = this.getReadableDatabase();
         Cursor registros = sdb.rawQuery(sql, null);
         String placa = "";

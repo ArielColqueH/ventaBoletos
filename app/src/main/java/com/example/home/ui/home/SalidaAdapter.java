@@ -42,7 +42,7 @@ public class SalidaAdapter extends RecyclerView.Adapter<SalidaAdapter.MyViewHold
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             codigoSalida=itemView.findViewById(R.id.codigoSalidaC);
-            fechaSalida=itemView.findViewById(R.id.codigoSalidaC);
+            fechaSalida=itemView.findViewById(R.id.fechaSalidaC);
             horaSalida=itemView.findViewById(R.id.horaSalidaC);
             placaSalida=itemView.findViewById(R.id.placaBusC);
             destinoSalida=itemView.findViewById(R.id.destinoC);

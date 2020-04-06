@@ -24,6 +24,11 @@ public class ModeloBus {
         this.duenio = duenio;
     }
 
+    public ModeloBus(int idBus, String placa) {
+        this.idBus = idBus;
+        this.placa = placa;
+    }
+
     public ModeloBus(int idBus, String placa, int capacidad, String tipoBus, int duenio) {
         this.idBus = idBus;
         this.placa = placa;

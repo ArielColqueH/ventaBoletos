@@ -81,7 +81,6 @@ public class BusesFragment extends Fragment {
         tipoBus = (Spinner) view.findViewById(R.id.spinnerTipoBus);
         nombreDuenoBus = (Spinner) view.findViewById(R.id.spinnerSocios);
 
-
         androidx.appcompat.app.AlertDialog.Builder alertAlta = new AlertDialog.Builder(getActivity());
         alertAlta.setTitle("Agregar Bus");
         alertAlta.setCancelable(false);

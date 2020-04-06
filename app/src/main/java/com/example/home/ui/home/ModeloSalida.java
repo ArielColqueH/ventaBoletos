@@ -21,7 +21,16 @@ public class ModeloSalida {
         this.destino = destino;
         this.fechaSalida = fechaSalida;
         this.horaSalida = horaSalida;
+        this.estado = estado;
         this.idBus = idBus;
+    }
+    public ModeloSalida(String destino, String fechaSalida, String horaSalida, int estado,int idBus) {
+
+        this.fechaSalida = fechaSalida;
+        this.horaSalida = horaSalida;
+        this.idBus = idBus;
+        this.destino = destino;
+        this.estado = estado;
     }
 
     public int getIdSalida() {
