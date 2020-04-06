@@ -176,6 +176,38 @@ public class AdminDataBase extends SQLiteOpenHelper {
         return nc;
     }
     //-----------//BUSES ---------------------
+    //-----------SALIDAS ---------------------
+    public String getNombreSocioFromBus(String idBus) {
+        String sql = "SELECT s.nomSoc FROM socios s,bus b where s.idSocio=b.idSocio and b.idBus="+idBus;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String noSocio = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    noSocio = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return noSocio;
+    }
+    public String getPlacaBus(String idBus) {
+        String sql = "SELECT placa FROM bus  where idBus="+idBus;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String placa = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    placa = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return placa;
+    }
+    //-----------//SALIDAS ---------------------
 
 
 }
