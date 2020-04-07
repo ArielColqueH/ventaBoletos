@@ -34,7 +34,6 @@ public class BusesFragment extends Fragment {
     List <ModeloSocio> listaBase;
     List <String> listaSpinner= new ArrayList<>();
     AdminDataBase adb;
-    busesDataBase busdb;
     ModeloSocio aux;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;

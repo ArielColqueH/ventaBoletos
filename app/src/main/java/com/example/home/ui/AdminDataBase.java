@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.home.ui.boleto.ModeloBoleto;
 import com.example.home.ui.buses.ModeloBus;
 import com.example.home.ui.home.ModeloSalida;
 import com.example.home.ui.socios.ModeloSocio;
@@ -24,9 +25,11 @@ public class AdminDataBase extends SQLiteOpenHelper {
         String sqlSocios = "create table socios(idSocio INTEGER PRIMARY KEY AUTOINCREMENT, nomSoc TEXT, apeSoc TEXT ,estSoc INTEGER)";
         String sqlBuses = "create table buses(idBus INTEGER PRIMARY KEY AUTOINCREMENT, placa TEXT, capacidad INTEGER ,tipobus TEXT ,estado INTEGER,idSocio INTEGER)";
         String sqlSalidas = "create table salidas(idSalida INTEGER PRIMARY KEY AUTOINCREMENT, fecha TEXT, hora TEXT ,destino TEXT ,estado INTEGER,idBus INTEGER)";
+        String sqlBoletos = "create table boletos(idBoleto INTEGER PRIMARY KEY AUTOINCREMENT, nombrePasajero, nitPasajero TEXT ,asientoBoleto INTEGER, precioBoleto REAL ,estado INTEGER,idSalida INTEGER)";
         db.execSQL(sqlSocios);
         db.execSQL(sqlBuses);
         db.execSQL(sqlSalidas);
+        db.execSQL(sqlBoletos);
     }
 
     @Override
@@ -34,6 +37,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS socios");
         db.execSQL("DROP TABLE IF EXISTS buses");
         db.execSQL("DROP TABLE IF EXISTS salidas");
+        db.execSQL("DROP TABLE IF EXISTS boletos");
         onCreate(db);
     }
     //------------------------------SOCIOS------------------------------
@@ -272,7 +276,71 @@ public class AdminDataBase extends SQLiteOpenHelper {
         registros.close();
         return placa;
     }
+
+    public List<ModeloSalida> getListaSalidas(){
+        String sql = "SELECT s.idSalida,s.destino,s.fecha,s.hora FROM salidas s where estado=0";
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        List<ModeloSalida> lista = new ArrayList<>();
+        Cursor registros = sdb.rawQuery(sql,null);
+        if(registros!=null && registros.getCount()>0){
+            if(registros.moveToFirst()){
+                do{
+                    int idSalida = registros.getInt(0);
+                    String destino = registros.getString(1);
+                    String fecha = registros.getString(2);
+                    String hora = registros.getString(3);
+                    lista.add(new ModeloSalida(idSalida,destino,fecha,hora));
+                }while(registros.moveToNext());
+            }
+        }
+        registros.close();
+        return lista;
+    }
     //-----------//SALIDAS ---------------------
+    //-------------BOLETOS-----------------------
+
+    public void altaBoleto(ModeloBoleto op){
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("nombrePasajero", op.getNombrePasajero());
+            cv.put("nitPasajero",op.getNitPasajero());
+            cv.put("asientoBoleto",op.getAsiento());
+            cv.put("precioBoleto",op.getPrecio());
+            cv.put("estado",op.getEstado());
+            cv.put("idSalida",op.getIdSalida());
+            SQLiteDatabase sdb = this.getWritableDatabase();
+            sdb.insert("boletos",null,cv);
+
+        }catch (Exception e){
+//            Toast.makeText(context,
+//                    "Error al aniadir", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // listado de una tabla
+    public List<ModeloBoleto> listaBoletos(){
+        String sql = "SELECT b.idBoleto,b.nombrePasajero,b.nitPasajero,b.asientoBoleto,b.precioBoleto,b.idSalida FROM boletos where estado=0";
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        List<ModeloBoleto> lista = new ArrayList<>();
+        Cursor registros = sdb.rawQuery(sql,null);
+        if(registros!=null && registros.getCount()>0){
+            if(registros.moveToFirst()){
+                do{
+                    int idBoleto = registros.getInt(0);
+                    String nomP = registros.getString(1);
+                    String nitP = registros.getString(2);
+                    int asientoB = registros.getInt(3);
+                    double precioB = registros.getDouble(4);
+                    int idSal = registros.getInt(5);
+                    lista.add(new ModeloBoleto(idBoleto,nomP,nitP,asientoB,precioB,idSal));
+                }while(registros.moveToNext());
+            }
+        }
+        registros.close();
+        return lista;
+    }
 
 
+
+    //-------------//BOLETOS-----------------------
 }

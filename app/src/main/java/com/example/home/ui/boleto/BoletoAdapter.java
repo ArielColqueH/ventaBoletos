@@ -1,7 +1,6 @@
-package com.example.home.ui.buses;
+package com.example.home.ui.boleto;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
 import com.example.home.ui.AdminDataBase;
+import com.example.home.ui.home.ModeloSalida;
 
 import java.util.ArrayList;
 
-public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
-    ArrayList<ModeloBus> lista;
+public class BoletoAdapter extends RecyclerView.Adapter<BoletoAdapter.MyViewHolder> {
+    ArrayList<ModeloSalida> lista;
     Context context;
-    ModeloBus b ;
+    ModeloSalida b ;
     AdminDataBase adb;
 
     int id=0;
@@ -35,21 +35,22 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView codigoBus,capacidadBus,placaBus, nombreSocio,tipoBus;
+        TextView codigoSalida,fechaSalida,horaSalida,nombreChofer,placaSalida,destinoSalida;
 
         // each data item is just a string in this case
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            codigoBus=itemView.findViewById(R.id.codigoBus);
-            placaBus=itemView.findViewById(R.id.numeroPlaca);
-            capacidadBus=itemView.findViewById(R.id.numeroAsientos);
-            nombreSocio=itemView.findViewById(R.id.socioBus);
-            tipoBus=itemView.findViewById(R.id.tipoBus);
+            codigoSalida=itemView.findViewById(R.id.codigoSalidaC);
+            fechaSalida=itemView.findViewById(R.id.fechaSalidaC);
+            horaSalida=itemView.findViewById(R.id.horaSalidaC);
+            placaSalida=itemView.findViewById(R.id.placaBusC);
+            destinoSalida=itemView.findViewById(R.id.destinoC);
+            nombreChofer=itemView.findViewById(R.id.nombreChoferC);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public BusAdapter(Context ct, ArrayList<ModeloBus> lista) {
+    public BoletoAdapter(Context ct, ArrayList<ModeloSalida> lista) {
             context=ct;
             this.lista=lista;
              adb = new AdminDataBase(ct,"empresaDeTransporte.db",null, 1);
@@ -61,7 +62,7 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
                                                      int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view  =inflater.inflate(R.layout.busescard,parent,false);
+        View view  =inflater.inflate(R.layout.homecard,parent,false);
         return new MyViewHolder(view);
     }
 
@@ -69,15 +70,18 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final int posi = position;
-        String nombreSocio="prueba";
-        final ModeloBus item = lista.get(position);
-        holder.codigoBus.setText(String.valueOf(item.getIdBus()));
-        holder.placaBus.setText(item.getPlaca());
-        holder.capacidadBus.setText(String.valueOf(item.getCapacidad()));
-        Log.d("id duenio",":"+item.getDuenio());
-        nombreSocio=adb.getNombreSocio(String.valueOf(item.getDuenio()));
-        holder.nombreSocio.setText(nombreSocio);
-        holder.tipoBus.setText(item.getTipoBus());
+        String nombreSocio="pruebaNombre";
+        String placaBus="pruebaPlaca";
+        final ModeloSalida item = lista.get(position);
+        holder.codigoSalida.setText(String.valueOf(item.getIdSalida()));
+        holder.fechaSalida.setText(item.getFechaSalida());
+        holder.horaSalida.setText(String.valueOf(item.getHoraSalida()));
+        holder.destinoSalida.setText(item.getDestino());
+        //Log.d("id duenio",":"+item.getDuenio());
+        nombreSocio=adb.getNombreSocioFromBus(String.valueOf(item.getIdBus()));
+        holder.nombreChofer.setText(nombreSocio);
+        placaBus=adb.getPlacaBus(String.valueOf(item.getIdBus()));
+        holder.placaSalida.setText(placaBus);
     }
     // Return the size of your dataset (invoked by the layout manager)
     @Override
