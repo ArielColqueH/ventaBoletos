@@ -79,7 +79,7 @@ public class BoletoFragment extends Fragment {
         alertAlta.setTitle("Agregar pasajero a Bus");
         alertAlta.setCancelable(false);
         alertAlta.setView(view);
-        final Spinner spinner = view.findViewById(R.id.spinnerBoletos);
+        final Spinner spinner = view.findViewById(R.id.spinnerBoletosSalidasD);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.numbers,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);

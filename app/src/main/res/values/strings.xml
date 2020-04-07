@@ -16,9 +16,10 @@
     <string name="ingrese_fecha">Ingrese fecha</string>
     <string name="ingrese_hora">Ingrese hora</string>
     <!--pasajero String-->
-    <string name="nombre_pasajero">Ingrese el nombre del pasajero</string>
-    <string name="nit_pasajero">Ingrese el nit del pasajero</string>
-    <string name="asiento_pasajero">Ingrese el asiento del pasajero</string>
+    <string name="nombre_pasajero">Nombre para factura</string>
+    <string name="nit_pasajero">Nit para factura</string>
+    <string name="asiento_pasajero">Asiento</string>
+    <string name="precio_pasajero">Precio venta</string>
     <!--socio String-->
     <string name="nombre_socio">Ingrese el nombre del socio</string>
     <string name="apellido_socio">Ingrese el apellido del socio</string>

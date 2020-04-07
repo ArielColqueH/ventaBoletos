@@ -9,14 +9,13 @@
         android:id="@+id/card_view_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="5dp"
         card_view:cardBackgroundColor="@color/colorAccent2"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="4dp"
         card_view:cardMaxElevation="5dp"
         card_view:cardUseCompatPadding="true"
-        card_view:contentPadding="10dp"
+        card_view:contentPadding="20dp"
         card_view:contentPaddingTop="20dp"
         card_view:contentPaddingBottom="20dp">
 
