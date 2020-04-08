@@ -179,29 +179,14 @@ public class HomeFragment extends Fragment {
 
         final String nombreDestinoRbn="";
         final EditText fecha, hora;
-        final Spinner destino,placa;
+        final Spinner placa;
 
         fecha = (EditText)view.findViewById(R.id.et_mostrar_fecha_picker);
         hora = (EditText)view.findViewById(R.id.et_mostrar_hora_picker);
-        destino = (Spinner) view.findViewById(R.id.spinnerSalidas);
+
         placa = (Spinner) view.findViewById(R.id.spinnerPlacas);
 
 
-        final Spinner spinnerDestinos = view.findViewById(R.id.spinnerSalidas);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.salidas,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinnerDestinos.setAdapter(adapter);
-        spinnerDestinos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-//                String text = adapterView.getItemAtPosition(position).toString();
-//                Toast.makeText(adapterView.getContext(),text,Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         //segundo spinner
 
         listaBase = adb.getListaPlacas();
@@ -254,10 +239,9 @@ public class HomeFragment extends Fragment {
 //                Toast.makeText(getActivity(),
 //                        radioButton.getText(), Toast.LENGTH_SHORT).show();
 
-                if(!spinnerDestinos.getSelectedItem().toString().equalsIgnoreCase("Elija un Destino")
-                && !spinnerPlacas.getSelectedItem().toString().equalsIgnoreCase("Placas"
+                if(!spinnerPlacas.getSelectedItem().toString().equalsIgnoreCase("Placas"
                 )){
-                    Toast.makeText(getActivity(),spinnerDestinos.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+
                     String h,f;
                     int duenioPosition = placa.getSelectedItemPosition();
                     Log.d("placa POSITION",":"+duenioPosition);
