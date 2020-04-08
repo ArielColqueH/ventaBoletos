@@ -15,11 +15,6 @@
         card_view:cardMaxElevation="10dp"
         >
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="4">
-        <LinearLayout
             android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,7 +27,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-
                 >
                 <TextView
                     android:layout_width="match_parent"
@@ -42,7 +36,7 @@
                     android:layout_weight="1.5"
                     />
                 <TextView
-                    android:id="@+id/codigo_socio"
+                    android:id="@+id/codigoBoletoC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Codigo I"
@@ -63,7 +57,7 @@
                     android:layout_weight="1.5"
                     />
                 <TextView
-                    android:id="@+id/nombre_cliente"
+                    android:id="@+id/nombreBoletoC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Cliente I"
@@ -84,7 +78,7 @@
                 android:layout_weight="1.5"
                 />
             <TextView
-                android:id="@+id/nit_cliente"
+                android:id="@+id/nitBoletoC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nit 1"
@@ -105,7 +99,7 @@
                     android:layout_weight="1.5"
                     />
                 <TextView
-                    android:id="@+id/asiento_cliente"
+                    android:id="@+id/asientoBoletoC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Asiento 1"
@@ -126,7 +120,7 @@
                     android:layout_weight="1.5"
                     />
                 <TextView
-                    android:id="@+id/tipo_bus"
+                    android:id="@+id/tipoBusBoletoC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="tipo bus 1"
@@ -147,10 +141,10 @@
                 android:layout_weight="1.5"
                 />
                 <TextView
-                    android:id="@+id/destino_cliente"
+                    android:id="@+id/destinoBoletoC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="tipo bus 1"
+                    android:text="destino 1"
                     android:textSize="16dp"
                     android:layout_weight="1.5"
                     />
@@ -169,7 +163,28 @@
                     android:layout_weight="1.5"
                     />
                 <TextView
-                    android:id="@+id/horario_cliente"
+                    android:id="@+id/horarioBoletoC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Horario salida"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha Salida :"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+                <TextView
+                    android:id="@+id/fechaBoletoC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="horario salida"
@@ -177,38 +192,30 @@
                     android:layout_weight="1.5"
                     />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Precio Boleto :"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+                <TextView
+                    android:id="@+id/precioBoletoC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Precio Boleto"
+                    android:textSize="16dp"
+                    android:layout_weight="1.5"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="3.25"
-            android:weightSum="3"
-            android:layout_margin="10dp">
-            <Button
-                android:id="@+id/btnEditar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:drawableLeft="@drawable/ic_edit"
-                android:background="@drawable/alert_dialog_bg_edit"
-                android:textColor="@color/colorWhite"
-                android:layout_weight="1"
-                android:paddingLeft="8dp">
-            </Button>
-            <Button
-                android:id="@+id/btnBorrar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:drawableLeft="@drawable/ic_delete"
-                android:background="@drawable/alert_dialog_bg_delete"
-                android:textColor="@color/colorWhite"
-                android:layout_weight="1"
-                android:paddingLeft="8dp"
-                android:layout_marginTop="5dp">
-            </Button>
-        </LinearLayout>
-        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -6,10 +6,10 @@ public class ModeloBoleto {
     private String nitPasajero;
     private int asiento;
     private double precio;
-    private double estado;
+    private int estado;
     private int idSalida;
 
-    public ModeloBoleto(int idBoleto, String nombrePasajero, String nitPasajero, int asiento, double precio, double estado, int idSalida) {
+    public ModeloBoleto(int idBoleto, String nombrePasajero, String nitPasajero, int asiento, double precio, int estado, int idSalida) {
         this.idBoleto = idBoleto;
         this.nombrePasajero = nombrePasajero;
         this.nitPasajero = nitPasajero;
@@ -27,7 +27,7 @@ public class ModeloBoleto {
         this.idSalida = idSalida;
     }
 
-    public ModeloBoleto(String nombrePasajero, String nitPasajero, int asiento, double precio, double estado, int idSalida) {
+    public ModeloBoleto(String nombrePasajero, String nitPasajero, int asiento, double precio, int estado, int idSalida) {
         this.nombrePasajero = nombrePasajero;
         this.nitPasajero = nitPasajero;
         this.asiento = asiento;
@@ -76,11 +76,11 @@ public class ModeloBoleto {
         this.precio = precio;
     }
 
-    public double getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(double estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

@@ -319,7 +319,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
 
     // listado de una tabla
     public List<ModeloBoleto> listaBoletos(){
-        String sql = "SELECT b.idBoleto,b.nombrePasajero,b.nitPasajero,b.asientoBoleto,b.precioBoleto,b.idSalida FROM boletos where estado=0";
+        String sql = "SELECT b.idBoleto,b.nombrePasajero,b.nitPasajero,b.asientoBoleto,b.precioBoleto,b.idSalida FROM boletos b where estado=0";
         SQLiteDatabase sdb = this.getReadableDatabase();
         List<ModeloBoleto> lista = new ArrayList<>();
         Cursor registros = sdb.rawQuery(sql,null);
@@ -338,6 +338,70 @@ public class AdminDataBase extends SQLiteOpenHelper {
         }
         registros.close();
         return lista;
+    }
+
+
+    public String getTipoBusFromBoleto(String idSalida) {
+        String sql = "SELECT b.tipobus FROM salidas s ,buses b where s.idBus=b.idBus and s.idSalida="+idSalida;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String tipoBus = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    tipoBus = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return tipoBus;
+    }
+    public String getDestinoFromBoleto(String idSalida) {
+        String sql = "SELECT s.destino FROM salidas s where s.idSalida="+idSalida;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String destino = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    destino = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return destino;
+    }
+
+
+    public String getFechaFromBoleto(String idSalida) {
+        String sql = "SELECT s.fecha FROM salidas s where s.idSalida="+idSalida;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String fecha = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    fecha = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return fecha;
+    }
+    public String getHoraFromBoleto(String idSalida) {
+        String sql = "SELECT s.hora FROM salidas s where s.idSalida="+idSalida;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String hora = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    hora = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return hora;
     }
 
 

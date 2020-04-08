@@ -45,7 +45,6 @@ public class BusesFragment extends Fragment {
         slideshowViewModel =
                 ViewModelProviders.of(this).get(BusesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_buses, container, false);
-        //busdb = new busesDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
         adb = new AdminDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
         recyclerView = (RecyclerView)  root.findViewById(R.id.my_recycler_buses);
         mAdapter = new BusAdapter(getActivity(),(ArrayList<ModeloBus>)adb.listaBuses());

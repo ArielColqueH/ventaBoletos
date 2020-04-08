@@ -55,7 +55,7 @@ public class BoletoFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_boletos, container, false);
         adb = new AdminDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
         recyclerView = (RecyclerView)  root.findViewById(R.id.my_recycler_boletos);
-        //mAdapter = new BoletosAdapter(getActivity(),(ArrayList<ModeloBoletos>)adb.listaBoletos());
+        mAdapter = new BoletoAdapter(getActivity(),(ArrayList<ModeloBoleto>)adb.listaBoletos());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FloatingActionButton fab = root.findViewById(R.id.fabhome);
@@ -70,23 +70,6 @@ public class BoletoFragment extends Fragment {
 
             }
         });
-//        Spinner spinner = root.findViewById(R.id.spinnerBoletos);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.numbers,android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//        spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-//                String text = adapterView.getItemAtPosition(position).toString();
-//                Toast.makeText(adapterView.getContext(),text,Toast.LENGTH_SHORT).show();
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-
-
         return root;
     }
     void agregarPasajero(){
@@ -95,6 +78,13 @@ public class BoletoFragment extends Fragment {
         LayoutInflater inflador = LayoutInflater.from(getActivity());
         final View view = inflador.inflate(R.layout.dialog_boletos ,null, false);
 
+        final EditText nombreB,nitB,destinoB,asientoB,precioB;
+        final Spinner idSalida;
+        nombreB = (EditText)view.findViewById(R.id.nombrePasajeroD);
+        nitB = (EditText)view.findViewById(R.id.nitPasajeroD);
+        asientoB = (EditText)view.findViewById(R.id.asientoD);
+        precioB = (EditText)view.findViewById(R.id.precioD);
+        idSalida = (Spinner) view.findViewById(R.id.spinnerBoletosSalidasD);
 
         androidx.appcompat.app.AlertDialog.Builder alertAlta = new AlertDialog.Builder(getActivity());
         alertAlta.setTitle("Agregar pasajero a Bus");
@@ -138,10 +128,35 @@ public class BoletoFragment extends Fragment {
         alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(!spinnerDestinoOpciones.getSelectedItem().toString().equalsIgnoreCase("Elija un Destino")){
-                    Toast.makeText(getActivity(),spinnerDestinoOpciones.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-                }
+                if (!spinnerDestinoOpciones.getSelectedItem().toString().equalsIgnoreCase("Destinos disponibles")) {
+                    Toast.makeText(getActivity(), spinnerDestinoOpciones.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    String idBoletoAux;
+                    String nombrePasajeroBoletoAux;
+                    String nitPasajeroBoletoAux;
+                    double precioAux;
+                    int asientoAux;
+                    int estadoAux = 0;
+                    int salidaPosition = spinnerDestinoOpciones.getSelectedItemPosition();
+                    Log.d("duenio POSITION", ":" + salidaPosition);
+                    Log.d("duenio key", ":" + spinnerMap.get(spinnerDestinoOpciones.getSelectedItemPosition()));
+                    int salidaIdAux = spinnerMap.get(spinnerDestinoOpciones.getSelectedItemPosition());
+                    //Log.d("ID SOCIO","VALOR :"+duenioId);
+                    nombrePasajeroBoletoAux = nombreB.getText().toString();
+                    nitPasajeroBoletoAux = nitB.getText().toString();
+                    precioAux = Double.parseDouble(precioB.getText().toString());
+                    asientoAux = Integer.parseInt(asientoB.getText().toString());
+                    if (nombrePasajeroBoletoAux.length() > 0 && nitPasajeroBoletoAux.length() > 0) {
+                        adb.altaBoleto(new ModeloBoleto(nombrePasajeroBoletoAux, nitPasajeroBoletoAux, asientoAux, precioAux, estadoAux, salidaIdAux));
+                        Toast.makeText(getActivity(), "El registro se grabo con exito", Toast.LENGTH_SHORT).show();
+                        listafdb = adb.listaBoletos();
+                        mAdapter = new BoletoAdapter(getActivity(), (ArrayList<ModeloBoleto>) listafdb);
+                        recyclerView.setAdapter(mAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    } else {
+                        Toast.makeText(getActivity(), "Error, campos vacios", Toast.LENGTH_SHORT).show();
+                    }
 
+                }
             }
         });
         alertAlta.show();
