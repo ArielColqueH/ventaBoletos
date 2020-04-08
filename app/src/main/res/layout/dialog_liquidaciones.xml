@@ -6,5 +6,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
+    <Spinner
+        android:id="@+id/spinnerSalidasLiquidacionesD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="8dp"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+<!--<RadioGroup-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:orientation="horizontal"-->
+<!--android:layout_marginTop="8dp"-->
+<!--    >-->
+<!--<com.example.home.ui.liquidaciones.myRadioButton-->
+<!--    android:id="@+id/acrb_male"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="32dp"-->
+<!--    android:minWidth="70dp"-->
+<!--    style="@style/myCustomRadioButton"-->
+<!--    android:layout_marginEnd="12dp"-->
+<!--    android:text="Male"-->
+<!--    />-->
+<!--<com.example.home.ui.liquidaciones.myRadioButton-->
+<!--    android:id="@+id/acrb_female"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="32dp"-->
+<!--    android:minWidth="70dp"-->
+<!--    style="@style/myCustomRadioButton"-->
+<!--    android:layout_marginEnd="12dp"-->
+<!--    android:text="Female"-->
+<!--    />-->
+<!--</RadioGroup>-->

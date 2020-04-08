@@ -17,7 +17,17 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-<!--    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">-->
+    <style name="myCustomRadioButton" parent="@android:style/TextAppearance">
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/selectable_text_color_checked_state</item>
+        <item name="android:background">@drawable/selectable_text_bg_color_checked_state</item>
+        <item name="android:fontFamily">@font/my_nunito</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!--    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">-->
 <!--        <item name="android:background">@drawable/alert_dialog_bg</item>-->
 <!--        <item name="android:radius">32dp</item>-->
 <!--    </style>-->
