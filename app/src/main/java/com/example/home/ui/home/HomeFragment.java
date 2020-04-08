@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -23,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -62,6 +65,8 @@ public class HomeFragment extends Fragment {
     private static final String BARRA = "/";
     private static final String DOS_PUNTOS = ":";
 
+    private AppCompatRadioButton radioButton;
+
     //Calendario para obtener fecha & hora
     public final Calendar c = Calendar.getInstance();
 
@@ -93,13 +98,9 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
+
                     altaSalidaBus();
-                }
-                catch (Exception e){
-                    Toast.makeText(getActivity(),
-                            "Error", Toast.LENGTH_SHORT).show();
-                };
+
             }
         });
         return root;
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment {
 //                "Toast por defecto", Toast.LENGTH_SHORT).show();
 
         LayoutInflater inflador = LayoutInflater.from(getActivity());
-        View view = inflador.inflate(R.layout.dialog_salidas ,null, false);
+        final View view = inflador.inflate(R.layout.dialog_salidas ,null, false);
 
         //Widget EditText donde se mostrara la fecha obtenida
         etFecha = (EditText) view.findViewById(R.id.et_mostrar_fecha_picker);
@@ -176,9 +177,10 @@ public class HomeFragment extends Fragment {
         });
         //-----------------------------------------------
 
-
+        final String nombreDestinoRbn="";
         final EditText fecha, hora;
         final Spinner destino,placa;
+
         fecha = (EditText)view.findViewById(R.id.et_mostrar_fecha_picker);
         hora = (EditText)view.findViewById(R.id.et_mostrar_hora_picker);
         destino = (Spinner) view.findViewById(R.id.spinnerSalidas);
@@ -233,14 +235,25 @@ public class HomeFragment extends Fragment {
         alertAlta.setCancelable(false);
         alertAlta.setView(view);
 
+        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radiogroup1);
+
         alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
         alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                Log.d("radio",":"+selectedId+" 1");
+
+                // find the radiobutton by returned id
+                radioButton = (AppCompatRadioButton) view.findViewById(selectedId);
+//                Toast.makeText(getActivity(),
+//                        radioButton.getText(), Toast.LENGTH_SHORT).show();
+
                 if(!spinnerDestinos.getSelectedItem().toString().equalsIgnoreCase("Elija un Destino")
                 && !spinnerPlacas.getSelectedItem().toString().equalsIgnoreCase("Placas"
                 )){
@@ -251,7 +264,8 @@ public class HomeFragment extends Fragment {
                     Log.d("placa key",":"+spinnerMap.get(placa.getSelectedItemPosition()));
                     int duenioPlaca = spinnerMap.get(placa.getSelectedItemPosition());
                     int estado=0;
-                    String dest = destino.getSelectedItem().toString();
+                    //String dest = destino.getSelectedItem().toString();
+                    String dest=String.valueOf(radioButton.getText());
                     h = hora.getText().toString().trim();
                     f = fecha.getText().toString().trim();
                     if(h.length() > 0 && f.length()>0) {

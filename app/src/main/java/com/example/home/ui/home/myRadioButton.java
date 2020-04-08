@@ -1,4 +1,4 @@
-package com.example.home.ui.liquidaciones;
+package com.example.home.ui.home;
 
 import android.content.Context;
 import android.util.AttributeSet;

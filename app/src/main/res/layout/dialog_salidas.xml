@@ -15,6 +15,42 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="8dp"
         />
+    <RadioGroup
+        android:id="@+id/radiogroup1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="8dp"
+        >
+    <com.example.home.ui.home.myRadioButton
+        android:id="@+id/acrb_uyuni"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:minWidth="75dp"
+        style="@style/myCustomRadioButton"
+        android:layout_marginEnd="12dp"
+        android:text="Uyuni"
+        android:checked="true"
+        />
+    <com.example.home.ui.home.myRadioButton
+        android:id="@+id/acrb_tupiza"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:minWidth="75dp"
+        style="@style/myCustomRadioButton"
+        android:layout_marginEnd="12dp"
+        android:text="Tupiza"
+        />
+        <com.example.home.ui.home.myRadioButton
+            android:id="@+id/acrb_villazon"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:minWidth="75dp"
+            style="@style/myCustomRadioButton"
+            android:layout_marginEnd="12dp"
+            android:text="Villazon"
+            />
+    </RadioGroup>
     <Spinner
         android:id="@+id/spinnerPlacas"
         android:layout_width="match_parent"
