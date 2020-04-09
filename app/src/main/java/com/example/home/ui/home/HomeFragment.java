@@ -183,10 +183,7 @@ public class HomeFragment extends Fragment {
 
         fecha = (EditText)view.findViewById(R.id.et_mostrar_fecha_picker);
         hora = (EditText)view.findViewById(R.id.et_mostrar_hora_picker);
-
         placa = (Spinner) view.findViewById(R.id.spinnerPlacas);
-
-
         //segundo spinner
 
         listaBase = adb.getListaPlacas();

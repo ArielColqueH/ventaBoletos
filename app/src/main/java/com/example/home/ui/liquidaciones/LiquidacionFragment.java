@@ -25,6 +25,7 @@ import com.example.home.R;
 import com.example.home.ui.AdminDataBase;
 import com.example.home.ui.boleto.ModeloBoleto;
 import com.example.home.ui.home.ModeloSalida;
+import com.example.home.ui.home.SalidaAdapter;
 import com.example.home.ui.socios.ModeloSocio;
 import com.example.home.ui.socios.SocioAdapter;
 import com.example.home.ui.socios.SociosViewModel;
@@ -43,7 +44,7 @@ public class LiquidacionFragment extends Fragment {
     ModeloSalida aux;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
-    List <ModeloBoleto> listafdb = new ArrayList<ModeloBoleto>();
+    List <ModeloLiquidacion> listafdb = new ArrayList<ModeloLiquidacion>();
     HashMap<Integer,Integer> spinnerMap = new HashMap<Integer, Integer>();
 
     private AppCompatRadioButton actbMale;
@@ -56,10 +57,10 @@ public class LiquidacionFragment extends Fragment {
                 ViewModelProviders.of(this).get(LiquidacionViewModel.class);
         View root = inflater.inflate(R.layout.fragment_liquidaciones, container, false);
         adb = new AdminDataBase(getActivity(),"empresaDeTransporte.db",null, 1);
-//        recyclerView = (RecyclerView)  root.findViewById(R.id.my_recycler_socios);
-//        mAdapter = new SocioAdapter(getActivity(),(ArrayList<ModeloSocio>)adb.listaSocios());
-//        recyclerView.setAdapter(mAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView = (RecyclerView)  root.findViewById(R.id.my_recycler_liquidaciones);
+        mAdapter = new LiquidacionAdapter(getActivity(),(ArrayList<ModeloLiquidacion>)adb.listaLiquidaciones());
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FloatingActionButton fab = root.findViewById(R.id.fabhome);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,28 +85,8 @@ public class LiquidacionFragment extends Fragment {
         View view = inflador.inflate(R.layout.dialog_liquidaciones ,null, false);
         final Spinner idSalidaLiquidaciones;
         idSalidaLiquidaciones = (Spinner) view.findViewById(R.id.spinnerSalidasLiquidacionesD);
-//
-        final AppCompatEditText acetStatus;
-        //radiobuttons
-//          final AppCompatRadioButton acrbMale;
-//          final AppCompatRadioButton acrbFemale;
-//          acrbMale=(AppCompatRadioButton)view.findViewById(R.id.acrb_male);
-//          acrbFemale=(AppCompatRadioButton)view.findViewById(R.id.acrb_female);
-//        acrbFemale.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getActivity(),
-//                        "female", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        acrbMale.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getActivity(),
-//                        "male", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-        //------radiobuttons
+
+
         AlertDialog.Builder alertAlta = new AlertDialog.Builder(getActivity());
         alertAlta.setTitle("Realizar liquidacion");
         alertAlta.setCancelable(false);
@@ -150,21 +131,23 @@ public class LiquidacionFragment extends Fragment {
         alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-//                String id,nom, ape;
-//                int estado=0;
-////                id = etid.getText().toString().trim();
-//                nom = nomb.getText().toString().trim();
-//                ape = apel.getText().toString().trim();
-//                if(nom.length() > 0 && ape.length()>0) {
-//                    adb.altaSocio(new ModeloSocio(nom,ape,estado));
-//                    Toast.makeText(getActivity(), "El registro se grabo con exito", Toast.LENGTH_SHORT).show();
-//                    listafdb = adb.listaSocios();
-//                    mAdapter = new SocioAdapter(getActivity(),(ArrayList<ModeloSocio>)listafdb);
-//                    recyclerView.setAdapter(mAdapter);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                }else{
-//                    Toast.makeText(getActivity(), "Error, campos vacios", Toast.LENGTH_SHORT).show();
-//                }
+                if(!spinnerDestinoOpciones.getSelectedItem().toString().equalsIgnoreCase("Salidas Programadas"
+                )){
+                    String h;
+                    int salidaPosition = idSalidaLiquidaciones.getSelectedItemPosition();
+                    Log.d("placa POSITION",":"+salidaPosition);
+                    Log.d("placa key",":"+spinnerMap.get(idSalidaLiquidaciones.getSelectedItemPosition()));
+                    int idSalida = spinnerMap.get(idSalidaLiquidaciones.getSelectedItemPosition());
+                    int estado=0;
+                    //String dest = destino.getSelectedItem().toString();
+                    adb.altaLiquidacion(new ModeloLiquidacion(estado,idSalida));
+                    Toast.makeText(getActivity(), "El registro se grabo con exito", Toast.LENGTH_SHORT).show();
+                    listafdb = adb.listaLiquidaciones();
+                    mAdapter = new LiquidacionAdapter(getActivity(),(ArrayList<ModeloLiquidacion>)listafdb);
+                    recyclerView.setAdapter(mAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                }
 
 
             }

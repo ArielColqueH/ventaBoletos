@@ -62,7 +62,7 @@
                     android:layout_weight="1.5"
                     />
                 <TextView
-                    android:id="@+id/nombreSocioC"
+                    android:id="@+id/nombreSocioLiquidacionC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nombre Socio I"

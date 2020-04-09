@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.home.ui.boleto.ModeloBoleto;
 import com.example.home.ui.buses.ModeloBus;
 import com.example.home.ui.home.ModeloSalida;
+import com.example.home.ui.liquidaciones.ModeloLiquidacion;
 import com.example.home.ui.socios.ModeloSocio;
 
 import java.util.ArrayList;
@@ -25,11 +26,13 @@ public class AdminDataBase extends SQLiteOpenHelper {
         String sqlSocios = "create table socios(idSocio INTEGER PRIMARY KEY AUTOINCREMENT, nomSoc TEXT, apeSoc TEXT ,estSoc INTEGER)";
         String sqlBuses = "create table buses(idBus INTEGER PRIMARY KEY AUTOINCREMENT, placa TEXT, capacidad INTEGER ,tipobus TEXT ,estado INTEGER,idSocio INTEGER)";
         String sqlSalidas = "create table salidas(idSalida INTEGER PRIMARY KEY AUTOINCREMENT, fecha TEXT, hora TEXT ,destino TEXT ,estado INTEGER,idBus INTEGER)";
-        String sqlBoletos = "create table boletos(idBoleto INTEGER PRIMARY KEY AUTOINCREMENT, nombrePasajero, nitPasajero TEXT ,asientoBoleto INTEGER, precioBoleto REAL ,estado INTEGER,idSalida INTEGER)";
+        String sqlBoletos = "create table boletos(idBoleto INTEGER PRIMARY KEY AUTOINCREMENT, nombrePasajero TEXT, nitPasajero TEXT ,asientoBoleto INTEGER, precioBoleto REAL ,estado INTEGER,idSalida INTEGER)";
+        String sqlLiquidacion = "create table liquidaciones(idLiquidacion INTEGER PRIMARY KEY AUTOINCREMENT, estado TEXT, idSalida INTEGER)";
         db.execSQL(sqlSocios);
         db.execSQL(sqlBuses);
         db.execSQL(sqlSalidas);
         db.execSQL(sqlBoletos);
+        db.execSQL(sqlLiquidacion);
     }
 
     @Override
@@ -38,6 +41,7 @@ public class AdminDataBase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS buses");
         db.execSQL("DROP TABLE IF EXISTS salidas");
         db.execSQL("DROP TABLE IF EXISTS boletos");
+        db.execSQL("DROP TABLE IF EXISTS liquidaciones");
         onCreate(db);
     }
     //------------------------------SOCIOS------------------------------
@@ -407,4 +411,86 @@ public class AdminDataBase extends SQLiteOpenHelper {
 
 
     //-------------//BOLETOS-----------------------
+    //---------------LIQUIDACION-----------------------------
+    public void altaLiquidacion(ModeloLiquidacion op){
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("estado", op.getEstado());
+            cv.put("idSalida",op.getIdSalida());
+            SQLiteDatabase sdb = this.getWritableDatabase();
+            sdb.insert("liquidaciones",null,cv);
+        }catch (Exception e){
+//            Toast.makeText(context,
+//                    "Error al aniadir", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public List<ModeloLiquidacion> listaLiquidaciones(){
+        String sql = "SELECT l.idLiquidacion,l.estado,l.idSalida FROM liquidaciones l where estado=0";
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        List<ModeloLiquidacion> lista = new ArrayList<>();
+        Cursor registros = sdb.rawQuery(sql,null);
+        if(registros!=null && registros.getCount()>0){
+            if(registros.moveToFirst()){
+                do{
+                    int idLiquidacion = registros.getInt(0);
+                    int estado = registros.getInt(1);
+                    int idSalida = registros.getInt(2);
+                    lista.add(new ModeloLiquidacion(idLiquidacion,estado,idSalida));
+                }while(registros.moveToNext());
+            }
+        }
+        registros.close();
+        return lista;
+    }
+    public String getFechaSalidaFromLiquidacion(String idSalida) {
+        String sql = "SELECT s.fecha FROM salidas s where s.idSalida="+idSalida;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String fecha = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    fecha = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return fecha;
+    }
+    public String getPlacaFromLiquidacion(String idSalida) {
+        String sql = "SELECT b.placa FROM salidas s ,buses b where s.idBus=b.idBus and s.idSalida="+idSalida;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String placa = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    placa = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return placa;
+    }
+    public String getNombreChoferSalidaFromLiquidacion(String idSalida) {
+        String sql = "SELECT so.nomSoc,so.apeSoc FROM salidas sa ,buses b ,socios so where sa.idBus=b.idBus and b.idSocio=so.idSocio and sa.idSalida="+idSalida;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String nombreCompleto = "";
+        String nombre = "";
+        String apellido = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    nombre = registros.getString(0);
+                    apellido = registros.getString(1);
+                    nombreCompleto=nombre+" "+apellido;
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return nombreCompleto;
+    }
+    //---------------//LIQUIDACION----------------------------
 }
