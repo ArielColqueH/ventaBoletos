@@ -36,6 +36,12 @@ public class ModeloBoleto {
         this.idSalida = idSalida;
     }
 
+    public ModeloBoleto(int idBoleto, String nombrePasajero, double precio) {
+        this.idBoleto = idBoleto;
+        this.nombrePasajero = nombrePasajero;
+        this.precio = precio;
+    }
+
     public int getIdBoleto() {
         return idBoleto;
     }

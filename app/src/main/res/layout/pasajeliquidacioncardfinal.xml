@@ -1,0 +1,63 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingDefaultResource">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_pasaje_liquidaciones_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        card_view:cardCornerRadius="15dp"
+        >
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:layout_gravity="center_vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/codBolLiqC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CodPas : "
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    />
+                <TextView
+                    android:id="@+id/nomPasLiqC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="NombPas"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+
+                    />
+                <TextView
+                    android:id="@+id/preBolLiqC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Precio"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -1,17 +1,28 @@
 package com.example.home.ui.liquidaciones;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
 import com.example.home.ui.AdminDataBase;
+import com.example.home.ui.boleto.BoletoAdapter;
+import com.example.home.ui.boleto.ModeloBoleto;
 import com.example.home.ui.home.ModeloSalida;
+import com.example.home.ui.socios.ModeloSocio;
 
 import java.util.ArrayList;
 
@@ -20,6 +31,8 @@ public class LiquidacionAdapter extends RecyclerView.Adapter<LiquidacionAdapter.
     Context context;
     ModeloSalida b ;
     AdminDataBase adb;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
 
     int id=0;
 
@@ -36,6 +49,7 @@ public class LiquidacionAdapter extends RecyclerView.Adapter<LiquidacionAdapter.
     // you provide access to all the views for a data item in a view holder
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView codigoLiquidacion,nombreChofer,placaBus,fechaSalida;
+        Button btnInformacion;
         // each data item is just a string in this case
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -43,6 +57,7 @@ public class LiquidacionAdapter extends RecyclerView.Adapter<LiquidacionAdapter.
             nombreChofer=itemView.findViewById(R.id.nombreSocioLiquidacionC);
             placaBus=itemView.findViewById(R.id.placaLiquidacionC);
             fechaSalida=itemView.findViewById(R.id.fechaLiquidacionC);
+            btnInformacion=itemView.findViewById(R.id.btnVerDetallesLiquidacion);
         }
     }
 
@@ -79,6 +94,45 @@ public class LiquidacionAdapter extends RecyclerView.Adapter<LiquidacionAdapter.
         holder.placaBus.setText(placa);
         nombreChofer=adb.getNombreChoferSalidaFromLiquidacion(String.valueOf(item.getIdSalida()));
         holder.nombreChofer.setText(nombreChofer);
+        holder.btnInformacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = item.getIdLiquidacion();
+                Log.d("position",":"+pos);
+
+
+
+                LayoutInflater inflador = LayoutInflater.from(context);
+                View view = inflador.inflate(R.layout.dialog_liquidacion_final ,null, false);
+//                TextView codBol,nomPas,preBol;
+//                codBol=(TextView)view.findViewById(R.id.codBolLiqC);
+//                nomPas=(TextView)view.findViewById(R.id.nomPasLiqC);
+//                preBol=(TextView)view.findViewById(R.id.preBolLiqC);
+                //adb = new AdminDataBase(context,"empresaDeTransporte.db",null, 1);
+                recyclerView = (RecyclerView)  view.findViewById(R.id.my_recycler_liquidaciones_final);
+                mAdapter = new LiquidacionBoletosAdapter(context,(ArrayList<ModeloBoleto>)adb.listaBoletosLiquidacion(String.valueOf(pos)));
+                recyclerView.setAdapter(mAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+                androidx.appcompat.app.AlertDialog.Builder alertAlta = new AlertDialog.Builder(context);
+                alertAlta.setTitle("Reporte de Liquidacion Final");
+                alertAlta.setCancelable(false);
+                alertAlta.setView(view);
+                //c = lista.get(pos);
+                alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+                alertAlta.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                alertAlta.show();
+            }
+        });
     }
     // Return the size of your dataset (invoked by the layout manager)
     @Override

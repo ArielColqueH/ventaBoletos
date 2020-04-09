@@ -493,4 +493,76 @@ public class AdminDataBase extends SQLiteOpenHelper {
         return nombreCompleto;
     }
     //---------------//LIQUIDACION----------------------------
+
+    //---------------LIQUIDACION FINAL--------------------=
+    public String getIdBoletoFromLiquidacionFinal(String idLiquidacion) {
+        String sql = "SELECT b.idBoleto FROM boletos b , salidas s , liquidaciones l where b.idSalida=s.idSalida and l.liquidacion="+idLiquidacion;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String idBoleto = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    idBoleto = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return idBoleto;
+    }
+
+    public String getNombrePasajeroFromLiquidacionFinal(String idLiquidacion) {
+        String sql = "SELECT b.nombrePasajero FROM boletos b , salidas s , liquidaciones l where b.idSalida=s.idSalida and l.liquidacion="+idLiquidacion;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String nombrePasajero = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    nombrePasajero = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return nombrePasajero;
+    }
+
+    public String getPrecioBoletoFromLiquidacionFinal(String idLiquidacion) {
+        String sql = "SELECT b.precioBoleto FROM boletos b , salidas s , liquidaciones l where b.idSalida=s.idSalida and l.liquidacion="+idLiquidacion;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        Cursor registros = sdb.rawQuery(sql, null);
+        String precioBol = "";
+        if (registros != null && registros.getCount() > 0) {
+            if (registros.moveToFirst()) {
+                do {
+                    precioBol = registros.getString(0);
+                } while (registros.moveToNext());
+            }
+        }
+        registros.close();
+        return precioBol;
+    }
+
+    public List<ModeloBoleto> listaBoletosLiquidacion(String idLiquidacion){
+        String sql = "SELECT b.idBoleto,b.nombrePasajero,b.precioBoleto FROM boletos b ,salidas s, liquidaciones l where b.idSalida=s.idSalida and l.idSalida=s.idSalida and l.idLiquidacion="+idLiquidacion;
+        SQLiteDatabase sdb = this.getReadableDatabase();
+        List<ModeloBoleto> lista = new ArrayList<>();
+        Cursor registros = sdb.rawQuery(sql,null);
+        if(registros!=null && registros.getCount()>0){
+            if(registros.moveToFirst()){
+                do{
+                    int idBoleto = registros.getInt(0);
+                    String nomP = registros.getString(1);
+                    double precio = registros.getDouble(2);
+                    lista.add(new ModeloBoleto(idBoleto,nomP,precio));
+                }while(registros.moveToNext());
+            }
+        }else{
+            Log.d("id",":"+idLiquidacion);
+            Log.d("db","0 rows");
+        }
+        registros.close();
+        return lista;
+    }
+    //------------------//LIQUIDACION FINAL----------------
 }
