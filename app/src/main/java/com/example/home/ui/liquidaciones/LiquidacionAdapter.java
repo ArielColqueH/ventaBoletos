@@ -139,15 +139,9 @@ public class LiquidacionAdapter extends RecyclerView.Adapter<LiquidacionAdapter.
                 double totalaPagar=Double.parseDouble(totalVentaBoletos)-totalDes;
                 totPagable.setText(String.valueOf(totalaPagar));
 
-                alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertAlta.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                    }
-                });
-                alertAlta.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
                     }
                 });
                 alertAlta.show();
