@@ -99,26 +99,46 @@ public class LiquidacionAdapter extends RecyclerView.Adapter<LiquidacionAdapter.
             public void onClick(View v) {
                 int pos = item.getIdLiquidacion();
                 Log.d("position",":"+pos);
-
-
-
                 LayoutInflater inflador = LayoutInflater.from(context);
                 View view = inflador.inflate(R.layout.dialog_liquidacion_final ,null, false);
-//                TextView codBol,nomPas,preBol;
-//                codBol=(TextView)view.findViewById(R.id.codBolLiqC);
-//                nomPas=(TextView)view.findViewById(R.id.nomPasLiqC);
-//                preBol=(TextView)view.findViewById(R.id.preBolLiqC);
                 //adb = new AdminDataBase(context,"empresaDeTransporte.db",null, 1);
                 recyclerView = (RecyclerView)  view.findViewById(R.id.my_recycler_liquidaciones_final);
                 mAdapter = new LiquidacionBoletosAdapter(context,(ArrayList<ModeloBoleto>)adb.listaBoletosLiquidacion(String.valueOf(pos)));
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
                 androidx.appcompat.app.AlertDialog.Builder alertAlta = new AlertDialog.Builder(context);
                 alertAlta.setTitle("Reporte de Liquidacion Final");
                 alertAlta.setCancelable(false);
                 alertAlta.setView(view);
                 //c = lista.get(pos);
+                TextView totBol,totVen,ivaDesc,itDesct,ofiDesc,totDesc,egrT,ingTot,totPagable;
+                totBol=(TextView)view.findViewById(R.id.totalBoletosD);
+                totVen=(TextView)view.findViewById(R.id.totalVentaD);
+                ivaDesc=(TextView)view.findViewById(R.id.ivaDescD);
+                itDesct=(TextView)view.findViewById(R.id.itDescD);
+                ofiDesc=(TextView)view.findViewById(R.id.desOfiDescD);
+                totDesc=(TextView)view.findViewById(R.id.totalDescD);
+                egrT=(TextView)view.findViewById(R.id.egreTotalFinalD);
+                ingTot=(TextView)view.findViewById(R.id.liqTotFinalD);
+                totPagable=(TextView)view.findViewById(R.id.pagTotalFinalD);
+
+                String totalPasajeros=adb.getTotalPasajerosFromLiquidacion(String.valueOf(pos));
+                String totalVentaBoletos=adb.getTotalVentaBoletosFromLiquidacion(String.valueOf(pos));
+                double ivaD=Double.parseDouble(totalVentaBoletos)*0.13;
+                double itD=Double.parseDouble(totalVentaBoletos)*0.03;
+                double ofiD=Double.parseDouble(totalVentaBoletos)*0.10;
+                double totalDes=ivaD+itD+ofiD;
+                totBol.setText(totalPasajeros);
+                totVen.setText(totalVentaBoletos);
+                ivaDesc.setText(String.valueOf(ivaD));
+                itDesct.setText(String.valueOf(itD));
+                ofiDesc.setText(String.valueOf(ofiD));
+                totDesc.setText(String.valueOf(totalDes));
+                ingTot.setText(totalVentaBoletos);
+                egrT.setText(String.valueOf(totalDes));
+                double totalaPagar=Double.parseDouble(totalVentaBoletos)-totalDes;
+                totPagable.setText(String.valueOf(totalaPagar));
+
                 alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
