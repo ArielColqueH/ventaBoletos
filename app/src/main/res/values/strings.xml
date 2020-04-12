@@ -11,6 +11,7 @@
     <string name="menu_liquidacion">Liquidacion</string>
     <string name="menu_buses">Buses</string>
     <string name="menu_socios">Socios</string>
+    <string name="menu_salir" >Salir</string>
     <!--pasajero Salida-->
     <string name="ingrese_salida">Ingrese salida</string>
     <string name="ingrese_fecha">Ingrese fecha</string>
@@ -26,6 +27,7 @@
     <!--bus String-->
     <string name="placa_bus">Placa</string>
     <string name="capacidad_bus">Capacidad</string>
+
 
     <string-array name="codigo">
         <item>1</item>
