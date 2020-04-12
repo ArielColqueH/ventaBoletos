@@ -69,6 +69,7 @@ public class BusesFragment extends Fragment {
     }
 
     void agregarBus(){
+        listaSpinner.clear();
         LayoutInflater inflador = LayoutInflater.from(getActivity());
         final View view = inflador.inflate(R.layout.dialog_buses ,null, false);
 
@@ -129,12 +130,12 @@ public class BusesFragment extends Fragment {
 
             }
         });
-        alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertAlta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
             }
         });
-        alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        alertAlta.setPositiveButton("Agregar Bus", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(!spinnerTipoBus.getSelectedItem().toString().equalsIgnoreCase("Elija un tipo de Bus")){

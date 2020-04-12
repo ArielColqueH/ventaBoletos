@@ -74,12 +74,12 @@ public class SociosFragment extends Fragment {
         alertAlta.setCancelable(false);
         alertAlta.setView(view);
 
-        alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertAlta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
             }
         });
-        alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        alertAlta.setPositiveButton("Agregar Socio", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String id,nom, ape;

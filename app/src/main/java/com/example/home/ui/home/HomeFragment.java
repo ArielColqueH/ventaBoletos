@@ -220,13 +220,13 @@ public class HomeFragment extends Fragment {
 
         final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radiogroup1);
 
-        alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertAlta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
-        alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        alertAlta.setPositiveButton("Agregar Salida", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 int selectedId = radioGroup.getCheckedRadioButtonId();

@@ -130,10 +130,10 @@ public class LiquidacionAdapter extends RecyclerView.Adapter<LiquidacionAdapter.
                 double totalDes=ivaD+itD+ofiD;
                 totBol.setText(totalPasajeros);
                 totVen.setText(totalVentaBoletos);
-                ivaDesc.setText(String.valueOf(ivaD));
-                itDesct.setText(String.valueOf(itD));
-                ofiDesc.setText(String.valueOf(ofiD));
-                totDesc.setText(String.valueOf(totalDes));
+                ivaDesc.setText(String.format("%.2f", ivaD));
+                itDesct.setText(String.format("%.2f",itD));
+                ofiDesc.setText(String.format("%.2f",ofiD));
+                totDesc.setText(String.format("%.2f",totalDes));
                 ingTot.setText(totalVentaBoletos);
                 egrT.setText(String.valueOf(totalDes));
                 double totalaPagar=Double.parseDouble(totalVentaBoletos)-totalDes;

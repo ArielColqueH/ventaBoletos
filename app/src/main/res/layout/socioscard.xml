@@ -10,7 +10,9 @@
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="20dp"
         card_view:cardMaxElevation="10dp"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         >
         <LinearLayout
             android:background="@drawable/bg_card2"

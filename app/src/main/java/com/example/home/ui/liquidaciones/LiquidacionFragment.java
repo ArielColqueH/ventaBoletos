@@ -80,6 +80,7 @@ public class LiquidacionFragment extends Fragment {
     }
 
     void realizarLiquidacion(){
+        listaSpinner.clear();
 
         LayoutInflater inflador = LayoutInflater.from(getActivity());
         View view = inflador.inflate(R.layout.dialog_liquidaciones ,null, false);
@@ -122,13 +123,13 @@ public class LiquidacionFragment extends Fragment {
         });
 
 
-        alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertAlta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
             }
         });
 
-        alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        alertAlta.setPositiveButton("Agregar Liquidacion", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(!spinnerDestinoOpciones.getSelectedItem().toString().equalsIgnoreCase("Salidas Programadas"

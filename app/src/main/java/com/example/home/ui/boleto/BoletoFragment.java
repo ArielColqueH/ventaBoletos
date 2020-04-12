@@ -73,6 +73,7 @@ public class BoletoFragment extends Fragment {
         return root;
     }
     void agregarPasajero(){
+        listaSpinner.clear();
 //        Toast.makeText(getActivity(),
 //                "Toast por defecto", Toast.LENGTH_SHORT).show();
         LayoutInflater inflador = LayoutInflater.from(getActivity());
@@ -120,12 +121,12 @@ public class BoletoFragment extends Fragment {
             }
         });
 
-        alertAlta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertAlta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
             }
         });
-        alertAlta.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        alertAlta.setPositiveButton("Realizar Venta", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (!spinnerDestinoOpciones.getSelectedItem().toString().equalsIgnoreCase("Destinos disponibles")) {
