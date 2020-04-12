@@ -23,4 +23,15 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:background="@drawable/ic_wave_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:translationZ="-1dp"/>
 </RelativeLayout>
