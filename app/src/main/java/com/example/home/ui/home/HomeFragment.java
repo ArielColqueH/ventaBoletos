@@ -98,14 +98,15 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                     altaSalidaBus();
-
             }
         });
+
         return root;
     }
     void altaSalidaBus(){
+        listaSpinner.clear();
+
 //        Toast.makeText(getActivity(),
 //                "Toast por defecto", Toast.LENGTH_SHORT).show();
 
@@ -195,7 +196,7 @@ public class HomeFragment extends Fragment {
             String spnPlaca = aux.getPlaca();
             listaSpinner.add(spnPlaca);
         }
-        listaSpinner.add(0,"Placas");
+        listaSpinner.add(0,"Placas de buses para Salidas");
         final Spinner spinnerPlacas = view.findViewById(R.id.spinnerPlacas);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, listaSpinner);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -236,7 +237,7 @@ public class HomeFragment extends Fragment {
 //                Toast.makeText(getActivity(),
 //                        radioButton.getText(), Toast.LENGTH_SHORT).show();
 
-                if(!spinnerPlacas.getSelectedItem().toString().equalsIgnoreCase("Placas"
+                if(!spinnerPlacas.getSelectedItem().toString().equalsIgnoreCase("Placas de buses para Salidas"
                 )){
 
                     String h,f;

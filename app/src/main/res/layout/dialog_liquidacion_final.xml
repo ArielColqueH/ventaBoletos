@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="VENTAS"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="@color/colorDark"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -30,23 +31,26 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre Pasajero"
+            android:text="Nom Pasajero"
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
 
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Precio Boleto"
+            android:text="Precio Venta(Bs)"
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <View
@@ -74,6 +78,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/totalBoletosD"
@@ -83,6 +88,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
 
             />
         <TextView
@@ -93,6 +99,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <View
@@ -106,7 +113,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="DESCUENTOS"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="@color/colorDark"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -126,6 +134,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/ivaDescD"
@@ -135,6 +144,7 @@
             android:textSize="14dp"
             android:layout_weight="2"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <LinearLayout
@@ -149,6 +159,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/itDescD"
@@ -158,6 +169,7 @@
             android:textSize="14dp"
             android:layout_weight="2"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <LinearLayout
@@ -172,6 +184,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/desOfiDescD"
@@ -181,6 +194,7 @@
             android:textSize="14dp"
             android:layout_weight="2"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <LinearLayout
@@ -195,6 +209,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/totalDescD"
@@ -204,6 +219,7 @@
             android:textSize="14dp"
             android:layout_weight="2"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <View
@@ -217,7 +233,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="REPORTE FINAL"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="@color/colorDark"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -237,6 +254,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/liqTotFinalD"
@@ -246,6 +264,7 @@
             android:textSize="14dp"
             android:layout_weight="2"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
 
     </LinearLayout>
@@ -262,6 +281,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/egreTotalFinalD"
@@ -271,6 +291,7 @@
             android:textSize="14dp"
             android:layout_weight="2"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <LinearLayout
@@ -285,6 +306,7 @@
             android:textSize="14dp"
             android:layout_weight="1"
             android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
             />
         <TextView
             android:id="@+id/pagTotalFinalD"
@@ -294,6 +316,7 @@
             android:textSize="14dp"
             android:layout_weight="2"
             android:textAlignment="center"
+            android:textColor="@color/colorDark"
             />
     </LinearLayout>
     <View

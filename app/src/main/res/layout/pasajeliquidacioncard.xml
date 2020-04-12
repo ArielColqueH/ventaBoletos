@@ -46,6 +46,7 @@
                 android:textSize="14dp"
                 android:layout_weight="1"
                     android:textAlignment="center"
+                    android:textColor="@color/colorDark"
 
                 />
                 <TextView
@@ -56,6 +57,7 @@
                     android:textSize="14dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
+                    android:textColor="@color/colorDark"
                     />
             </LinearLayout>
         </LinearLayout>
