@@ -9,31 +9,29 @@
         android:id="@+id/card_view_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/colorAccent2"
-        card_view:cardCornerRadius="10dp"
-
-        android:layout_marginBottom="1dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:contentPadding="10dp">
-
+        card_view:cardCornerRadius="20dp"
+        card_view:cardBackgroundColor="#00000000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        card_view:cardElevation="5dp">
         <LinearLayout
+            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@drawable/bg_card2"
             android:weightSum="2">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
+                android:orientation="vertical"
+                android:padding="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -42,7 +40,6 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="14dp"
                         android:textStyle="bold" />
-
                     <TextView
                         android:id="@+id/codigoSalidaC"
                         android:layout_width="wrap_content"
@@ -57,9 +54,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -68,7 +63,6 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="14dp"
                         android:textStyle="bold" />
-
                     <TextView
                         android:id="@+id/destinoC"
                         android:layout_width="wrap_content"
@@ -83,9 +77,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -94,7 +86,6 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="14dp"
                         android:textStyle="bold" />
-
                     <TextView
                         android:id="@+id/fechaSalidaC"
                         android:layout_width="wrap_content"
@@ -111,14 +102,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
+                android:orientation="vertical"
+                android:padding="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -142,9 +131,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -153,7 +140,6 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="14dp"
                         android:textStyle="bold" />
-
                     <TextView
                         android:id="@+id/placaBusC"
                         android:layout_width="wrap_content"
@@ -164,13 +150,10 @@
                         android:textSize="14dp"
                         android:textAlignment="textEnd"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -179,7 +162,6 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="14dp"
                         android:textStyle="bold" />
-
                     <TextView
                         android:id="@+id/horaSalidaC"
                         android:layout_width="wrap_content"

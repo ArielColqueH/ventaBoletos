@@ -8,23 +8,38 @@
         android:id="@+id/card_view_liquidaciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        card_view:cardCornerRadius="15dp"
+        card_view:cardCornerRadius="20dp"
         card_view:cardMaxElevation="10dp"
+        android:layout_margin="10dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="4"
+            android:background="@drawable/bg_card2">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="3.25"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/btnVerDetallesLiquidacion"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/alert_dialog_bg_edit"
+                    android:drawableLeft="@drawable/ic_info"
+                    android:paddingLeft="8dp"
+                    android:textColor="@color/colorWhite"
+                    ></Button>
+            </LinearLayout>
         <LinearLayout
             android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="10dp"
+
             android:layout_weight="0.75"
             android:layout_gravity="center_vertical"
             >
@@ -39,6 +54,8 @@
                     android:text="Codigo Liquidacion : "
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/codigoLiquidacionC"
@@ -47,6 +64,7 @@
                     android:text="Codigo I"
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
                     />
             </LinearLayout>
             <LinearLayout
@@ -60,6 +78,8 @@
                     android:text="Nombre Socio :"
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/nombreSocioLiquidacionC"
@@ -68,6 +88,7 @@
                     android:text="Nombre Socio I"
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
                     />
             </LinearLayout>
             <LinearLayout
@@ -81,6 +102,8 @@
                     android:text="Placa Bus :"
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/placaLiquidacionC"
@@ -89,6 +112,7 @@
                     android:text="Placa"
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
                     />
             </LinearLayout>
             <LinearLayout
@@ -102,6 +126,8 @@
                     android:text="Fecha Liquidacion :"
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/fechaLiquidacionC"
@@ -110,27 +136,11 @@
                     android:text="Fecha Liquidacion"
                     android:textSize="14dp"
                     android:layout_weight="1.5"
+                    android:textColor="@color/colorWhite"
                     />
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="3.25"
-            android:layout_margin="10dp"
 
-            android:gravity="center_vertical">
-            <Button
-                android:id="@+id/btnVerDetallesLiquidacion"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/alert_dialog_bg_edit"
-                android:drawableLeft="@drawable/ic_info"
-                android:paddingLeft="8dp"
-                android:textColor="@color/colorWhite"
-                ></Button>
-        </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
